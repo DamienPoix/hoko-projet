@@ -1,3 +1,7 @@
 #styleNavModification{
     display: inline-block;
 }
+.error{
+    color:red;
+    position: absolute;
+}

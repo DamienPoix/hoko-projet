@@ -11,7 +11,6 @@ $(document).ready(function(){
     $('select').formSelect();
   });
 //script pour les formulaire pour les faire apparaitre et disparaitre
-
 $(document).ready(function () {
     $("#registerForm").hide();
     $(".formVisibilty").click(function () {

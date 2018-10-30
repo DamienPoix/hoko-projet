@@ -1,3 +1,4 @@
+//
 $(document).ready(function () {
     $("#formRegister").on('submit', function (e) {
         e.preventDefault();
@@ -5,32 +6,42 @@ $(document).ready(function () {
             url: '../ajax/registerAjax.php', // La ressource ciblée
             type: 'POST', //le type de la requete
             data: new FormData(this),
-            contentType: false, // The content type used when sending data to the server.
-            cache: false, // To unable request pages to be cached
-            processData: false, // To send DOMDocument or non processed data file it is set to false
+            contentType: false,
+            cache: false,
+            processData: false,
             dataType: 'json', //le type de donnée a recevoir
             success: function (data) {
-                if (data['succes']) { //inscription réussi
-                    $('.success').show();
+                console.log(data['success']);
+                if (data['success'] == 1){ //inscription réussi
                     $('#modalAccount').modal('close');
+                    M.toast({html: 'Inscription validé!!'});
                 } else {
-                    alert('banana');
+                    M.toast({html: 'une erreur c\'est produite a l\'envoie du formulaire'});
                 }
             }
         });
     });
     $('#formRegister input').each(function (index) {
         $(this).focusout(function () {
+            var name = $(this).attr('name');
             $.ajax({
                 url: '../ajax/verifRegister.php', // La ressource ciblée
                 type: 'POST', //le type de la requete
                 data: {
                     value: $(this).val(),
-                    name: $(this).attr('name')
+                    name: name
                 },
                 dataType: 'json', //le type de donnée a recevoir
-                success: function (data) {
-                    
+                success: function (formError) {
+                    if (formError[name]) {
+                        //
+                        $('label[for=\'' + name +'\']').next().html(formError[name]);
+                        //
+                    } else {
+                        //
+                        $('label[for=\'' + name +'\']').next().html('');
+                        //
+                    }
                 }
             });
         });

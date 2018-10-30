@@ -6,7 +6,7 @@ $regexUsername = '/^[a-zA-Z0-9àáâãäåéèêëîïìíØøòóôõöùúûü
 $regexName = '/^[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ° \'\-]+$/';
 $regexMail = '/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/';
 $regexId = '/[0-9]+/';
-$regexPhoneNumber = '/^0[1-9][0-9]{8}/';
+$regexPhone = '/^[0][1-9][0-9]{8}$/';
 //
 $formError = array();
 $value = '';
@@ -18,7 +18,7 @@ if (isset($_POST['name'])) {
     if ($name == 'lastname') {
         if (!empty($value)) {
             if (!preg_match($regexName, $value)) {
-                $formError['lastname'] = 'caractère utiliser invalide';
+                $formError['lastname'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['lastname'] = 'Veuillez indiqué votre nom';
@@ -28,7 +28,7 @@ if (isset($_POST['name'])) {
     if ($name == 'firstname') {
         if (!empty($value)) {
             if (!preg_match($regexName, $value)) {
-                $formError['firstname'] = 'caractère utiliser invalide';
+                $formError['firstname'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['firstname'] = 'Veuillez indiqué votre prénom';
@@ -38,7 +38,7 @@ if (isset($_POST['name'])) {
     if ($name == 'birthdate') {
         if (!empty($value)) {
             if (!preg_match($regexBirthDate, $value)) {
-                $formError['birthdate'] = 'caractère utiliser invalide';
+                $formError['birthdate'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['birthdate'] = 'Veuillez indiqué votre date de naissance valide';
@@ -48,7 +48,7 @@ if (isset($_POST['name'])) {
     if ($name == 'mail') {
         if (!empty($value)) {
             if (!preg_match($regexMail, $value)) {
-                $formError['mail'] = 'caractère utiliser invalide';
+                $formError['mail'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['mail'] = 'Veuillez indiqué votre adresse mail valide';
@@ -57,8 +57,8 @@ if (isset($_POST['name'])) {
     //
     if ($name == 'phone') {
         if (!empty($value)) {
-            if (!preg_match($regexPhoneNumber, $value)) {
-                $formError['phone'] = 'caractère utiliser invalide';
+            if (!preg_match($regexPhone, $value)) {
+                $formError['phone'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['phone'] = 'Veuillez indiqué votre numéro de téléphone';
@@ -68,7 +68,7 @@ if (isset($_POST['name'])) {
     if ($name == 'username') {
         if (!empty($value)) {
             if (!preg_match($regexUsernamee, $value)) {
-                $formError['username'] = 'caractère utiliser invalide';
+                $formError['username'] = 'caractère utilisé invalide';
             }
         } else {
             $formError['username'] = 'Veuillez indiqué votre username';
@@ -81,17 +81,6 @@ if (isset($_POST['name'])) {
              $formError['password'] = 'Veuillez indiqué votre mot de passe';
         } 
     }
-    //
-    if ($name == 'userType') {
-        if (!empty($value)) {
-            if (!preg_match($regexId, $value)) {
-                $formError['userType'] = 'caractère utiliser invalide';
-            }
-        } else {
-            $formError['userType'] = 'Veuillez indiqué votre username';
-        }
-    }
-    //
 }
 echo json_encode($formError);
 

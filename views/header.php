@@ -1,6 +1,6 @@
 <?php
 include_once 'class/path.php';
-include_once path::getControllersPath().'formUser.php';
+include_once path::getControllersPath() . 'formUser.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,27 +66,13 @@ include_once path::getControllersPath().'formUser.php';
                                         <i class="material-icons prefix">face</i>
                                         <input id="lastname" type="text" class="validate" name="lastname">
                                         <label for="lastname">Nom </label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['lastname'])) {
-                                                ?>
-                                                <p><?= $formError['lastname']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                        <p class="error"></p>
                                     </div>
                                     <div class="input-field col s12 m6">
                                         <i class="material-icons prefix">face</i>
                                         <input  id="firstname" type="text" class="validate" name="firstname">
                                         <label for="firstname">Prénom</label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['firstname'])) {
-                                                ?>
-                                                <p><?= $formError['firstname']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -101,27 +87,13 @@ include_once path::getControllersPath().'formUser.php';
                                             <?php } ?>
                                         </select>
                                         <label>Civilite</label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['idCivility'])) {
-                                                ?>
-                                                <p><?= $formError['idCivility']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                        <p class="error"></p>
                                     </div>
                                     <div class="input-field col s6">
                                         <i class="material-icons prefix">cake</i>
+                                        <input type="date" id="birthdate" name="birthdate" placeholder=""/>
                                         <label for="birthdate"> Date de naissance </label>
-                                        <input type="date" id="birthdate" name="birthdate"/>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['birthdate'])) {
-                                                ?>
-                                                <p><?= $formError['birthdate']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                       <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -129,27 +101,13 @@ include_once path::getControllersPath().'formUser.php';
                                         <i class="material-icons prefix">contact_mail</i>
                                         <input id="mail" type="text" class="validate" name="mail">
                                         <label for="mail">Mail </label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['mail'])) {
-                                                ?>
-                                                <p><?= $formError['mail']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                       <p class="error"></p>
                                     </div>
                                     <div class="input-field col s12 m6">
                                         <i class="material-icons prefix">contact_phone</i>
                                         <input  id="phone" type="text" class="validate" name="phone">
                                         <label for="phone">Téléphone</label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['phone'])) {
-                                                ?>
-                                                <p><?= $formError['phone']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                             </fieldset>
@@ -160,14 +118,7 @@ include_once path::getControllersPath().'formUser.php';
                                         <i class="material-icons prefix">person_outline</i>
                                         <input  id="username" type="text" class="validate" name="username">
                                         <label for="username">Nom d'utilisateur</label>
-                                        <div class="error">
-                                            <?php
-                                            //affichage du message d'erreur si le tableau d'erreur existe
-                                            if (isset($formError['username'])) {
-                                                ?>
-                                                <p><?= $formError['username']; ?></p>
-                                            <?php } ?>
-                                        </div>
+                                       <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -175,30 +126,17 @@ include_once path::getControllersPath().'formUser.php';
                                         <i class="material-icons prefix">vpn_key</i>
                                         <input type="text" name="password" id="password" class="validate" required />
                                         <label for="password">Mot de passe </label>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <select name="userType">
+                                    <option value="0" disabled selected>Type de compte</option> 
                                     <?php
                                     foreach ($showType as $type) {
                                         ?>
-                                        <div class="col s6">
-                                            <p>
-                                                <label>
-                                                    <input class="with-gap" name="userType" value="<?= $type->id ?>" type="radio" <?= ($type->id == 1) ? 'checked' : '' ?>/>
-                                                    <span><?= $type->name ?></span>
-                                                </label>
-                                            </p>
-                                        </div>
-                                        <div class="error">
-                                            <?php
-                                        }
-                                        //affichage du message d'erreur si le tableau d'erreur existe
-                                        if (isset($formError['userType'])) {
-                                            ?>
-                                            <p><?= $formError['userType']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+                                        <option value="<?= $type->id ?>"><?= $type->name ?></option>
+                                    <?php } ?>
+                                </select>     
                             </fieldset>
                             <input type="submit" name="submit" id="submitRegister"/>
                         </form>

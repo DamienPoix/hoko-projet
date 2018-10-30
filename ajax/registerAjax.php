@@ -8,8 +8,8 @@ $regexBirthDate = '/^[0-9]{4}-[0-9]{2}-[0-9]{2}/';
 //
 $regexName = '/^[a-zA-Z0-9àáâãäåéèêëîïìíØøòóôõöùúûüýÿñçßæœ_\'\-]{1,25}$/';
 //
-$error = array();
-$succes = false;
+$formError = array();
+$success = 0;
 $user = new users();
 //vérification pour le champ lastname
 //
@@ -65,7 +65,7 @@ if (!empty($_POST['username'])) {
 }
 //vérification pour le champ password
 if (!empty($_POST['password'])) {
-    $user->idUserType = htmlspecialchars($_POST['password']);
+    $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 } else {
     $formError['password'] = '';
 }
@@ -78,10 +78,11 @@ if (!empty($_POST['userType'])) {
 //s'il n'y a pas d'erreur on appelle la méthode pour l'ajout d'un utilisateur
 if (count($formError) == 0) {
     $user->createDate = date('Y-m-d');
+    $success = 1;
+    
     //affichage d'un message d'erreur si la méthode ne s'exécute pas
     if (!$user->addUser()) {
         $formError['inscriptionUserSubmit'] = 'Il y a eu un problème veuillez contacter l\'administrateur du site';
     }
 }
-
-echo json_encode($formError);
+echo json_encode(array('success' => $success , 'formError' => $formError));
