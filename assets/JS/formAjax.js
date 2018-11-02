@@ -14,9 +14,9 @@ $(document).ready(function () {
                 console.log(data['success']);
                 if (data['success'] == 1){ //inscription réussi
                     $('#modalAccount').modal('close');
-                    M.toast({html: 'Inscription validé!!'});
+                    M.toast({html: 'Inscription validée!!'});
                 } else {
-                    M.toast({html: 'une erreur c\'est produite a l\'envoie du formulaire'});
+                    M.toast({html: 'une erreur s\'est produite à l\'envoi du formulaire'});
                 }
             }
         });

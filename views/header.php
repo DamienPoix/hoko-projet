@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'class/path.php';
 include_once path::getControllersPath() . 'formUser.php';
 ?>
@@ -11,9 +12,17 @@ include_once path::getControllersPath() . 'formUser.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script src="../assets/JS/headerScript.js"></script>
         <script src="../assets/JS/formAjax.js"></script>
+        <script src="../assets/JS/loginScript.js"></script>
         <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
     <body>
+        <?php 
+        if(isset($_SESSION['isConnect'])){
+            echo 'YOUPIII';
+        } else {
+            echo 'bouhhh';
+        }
+        ?>
         <nav>
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo">Logo</a>
@@ -34,24 +43,25 @@ include_once path::getControllersPath() . 'formUser.php';
                 <div id="connectForm">
                     <h4>Connexion</h4>
                     <div class="row">
-                        <form class="col s12" method="POST" action="#">
+                        <form class="col s12" method="POST" action="#" id="loginForm">
                             <div class="row">
+                                <p id="errorMessage">Username ou mot de passe invalide!!</p>
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">person_outline</i>
-                                    <input type="text" id="usernameConnexion" class="autocomplete">
+                                    <input type="text" id="usernameConnexion" class="autocomplete" name="usernameConnexion">
                                     <label for="usernameConnexion">Username</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">vpn_key</i>
-                                    <input type="text" id="passwordConnexion" class="autocomplete">
+                                    <input type="text" id="passwordConnexion" class="autocomplete" name="passwordConnexion">
                                     <label for="passwordConnexion">mot de passe</label>
                                 </div>
                                 <input type="submit" name="login" id="login" />
                             </div>
                         </form>
-                        <button class="formVisibilty">Inscription</button>
+                        <button class="btn formVisibilty">Inscription</button>
                     </div>
                 </div>
                 <?php // fin du formulaire pour se connecter ?>
@@ -76,7 +86,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col s6">
+                                    <div class="input-field col  s12 m6">
                                         <i class="material-icons prefix">people</i>
                                         <select name="idCivility">
                                             <option value="0" disabled selected>Civilité</option>
@@ -89,7 +99,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                         <label>Civilite</label>
                                         <p class="error"></p>
                                     </div>
-                                    <div class="input-field col s6">
+                                    <div class="input-field col s12 m6">
                                         <i class="material-icons prefix">cake</i>
                                         <input type="date" id="birthdate" name="birthdate" placeholder=""/>
                                         <label for="birthdate"> Date de naissance </label>
@@ -124,7 +134,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                 <div class="row">
                                     <div class="input-field col s12 m12">
                                         <i class="material-icons prefix">vpn_key</i>
-                                        <input type="text" name="password" id="password" class="validate" required />
+                                        <input type="password" name="password" id="password" class="validate" required />
                                         <label for="password">Mot de passe </label>
                                         <p class="error"></p>
                                     </div>

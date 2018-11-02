@@ -1,6 +1,7 @@
 <?php
+
 include_once '../class/path.php';
-include_once path::getModelsPath().'user.php';
+include_once path::getModelsPath() . 'user.php';
 //déclaration des regex pour les inputs des formulaires de connexion et d'inscription
 //déclaration de le regex birthdate 
 //$regexBirthDate = '/^(([0-2][\d])|([3][0-1]))\/(([0][\d])|([1][0-2]))\/(([1][9][2-9][0-9])|([2][0]([0][0-9])|([1][0-8])))$/';
@@ -61,7 +62,7 @@ if (!empty($_POST['username'])) {
         $formError['username'] = 'Merci d\'utilisé un username valide(caractère maximale)';
     }
 } else {
-    $formError['username'] = 'Merci de remplire le champ phone correctement';
+    $formError['username'] = 'Merci de remplir le champ téléphone correctement';
 }
 //vérification pour le champ password
 if (!empty($_POST['password'])) {
@@ -73,16 +74,17 @@ if (!empty($_POST['password'])) {
 if (!empty($_POST['userType'])) {
     $user->idUserType = htmlspecialchars($_POST['userType']);
 } else {
-    $formError['userType'] = 'Merci de remplire le champ userType correctement';
+    $formError['userType'] = 'Merci de remplir le champ userType correctement';
 }
 //s'il n'y a pas d'erreur on appelle la méthode pour l'ajout d'un utilisateur
 if (count($formError) == 0) {
     $user->createDate = date('Y-m-d');
-    $success = 1;
-    
-    //affichage d'un message d'erreur si la méthode ne s'exécute pas
-    if (!$user->addUser()) {
-        $formError['inscriptionUserSubmit'] = 'Il y a eu un problème veuillez contacter l\'administrateur du site';
-    }
+        //si tout est bon on envoie 1
+        $success = 1;
+        //affichage d'un message d'erreur si la méthode ne s'exécute pas
+        if (!$user->addUser()) {
+            $formError['submitRegister'] = 'Il y a eu un problème veuillez contacter l\'administrateur du site';
+        }
+        //si la méthode retourne false affichage d'un message d'erreur car la requête ne s'est pas exécutée correctement
 }
-echo json_encode(array('success' => $success , 'formError' => $formError));
+echo json_encode(array('success' => $success, 'formError' => $formError));
