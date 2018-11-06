@@ -1,0 +1,7 @@
+<ifModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule ^banana$ views/banana.php
+RewriteRule ^Profil$ views/profil.php
+RewriteRule ^disconnect$ views/disconnect.php
+RewriteRule ^home$ index.php
+</ifModule>

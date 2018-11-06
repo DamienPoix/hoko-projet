@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once 'class/path.php';
 include_once path::getControllersPath() . 'formUser.php';
+include_once path::getControllersPath() . 'profilCtl.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,19 +16,21 @@ include_once path::getControllersPath() . 'formUser.php';
         <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
     <body>
-        <?php 
-        if(isset($_SESSION['isConnect'])){
-            echo 'YOUPIII';
-        } else {
-            echo 'bouhhh';
-        }
-        ?>
         <nav>
             <div class="nav-wrapper">
-                <a href="#!" class="brand-logo">Logo</a>
+                <a href="home" class="brand-logo">HOKO</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li> <a href="#modalAccount" class="waves-effect waves-dark btn modal-trigger">Connexion/inscription</a></li>
+                    <?php if (isset($_SESSION['isConnect']) == true) { ?>
+                    <li> <a href="#" class="waves-effect waves-dark btn dropdown-trigger" data-target='dropProfil' id="dropWidth"><?= $_SESSION['username'] ?></a></li>
+                        <ul id='dropProfil' class='dropdown-content'>
+                            <li><a href="Profil?id=<?= $_SESSION['id'] ?>">Profil</a></li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li><a href="disconnect">Déconnexion</a></li>
+                        </ul>
+                    <?php } else { ?>
+                        <li> <a href="#modalAccount" class="waves-effect waves-dark btn modal-trigger">Connexion/inscription</a></li>
+                    <?php } ?>
                 </ul>
             </div>
         </nav>
@@ -55,7 +57,7 @@ include_once path::getControllersPath() . 'formUser.php';
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">vpn_key</i>
-                                    <input type="text" id="passwordConnexion" class="autocomplete" name="passwordConnexion">
+                                    <input type="text" id="passwordConnexion" class="autocomplete btn" name="passwordConnexion">
                                     <label for="passwordConnexion">mot de passe</label>
                                 </div>
                                 <input type="submit" name="login" id="login" />
@@ -64,7 +66,7 @@ include_once path::getControllersPath() . 'formUser.php';
                         <button class="btn formVisibilty">Inscription</button>
                     </div>
                 </div>
-                <?php // fin du formulaire pour se connecter ?>
+                <?php // fin du formulaire pour se connecter  ?>
                 <div id="registerForm">
                     <h4>Inscription</h4>
                     <div class="row">
@@ -103,7 +105,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                         <i class="material-icons prefix">cake</i>
                                         <input type="date" id="birthdate" name="birthdate" placeholder=""/>
                                         <label for="birthdate"> Date de naissance </label>
-                                       <p class="error"></p>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -111,7 +113,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                         <i class="material-icons prefix">contact_mail</i>
                                         <input id="mail" type="text" class="validate" name="mail">
                                         <label for="mail">Mail </label>
-                                       <p class="error"></p>
+                                        <p class="error"></p>
                                     </div>
                                     <div class="input-field col s12 m6">
                                         <i class="material-icons prefix">contact_phone</i>
@@ -128,7 +130,7 @@ include_once path::getControllersPath() . 'formUser.php';
                                         <i class="material-icons prefix">person_outline</i>
                                         <input  id="username" type="text" class="validate" name="username">
                                         <label for="username">Nom d'utilisateur</label>
-                                       <p class="error"></p>
+                                        <p class="error"></p>
                                     </div>
                                 </div>
                                 <div class="row">

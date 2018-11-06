@@ -61,12 +61,12 @@ class users extends database {
         return $exist;
     }
 
-      public function userConnect() {
+    public function userConnect() {
         $exist = false;
         $request = 'SELECT `id`, `lastname`, `firstname`, `password`, `username` FROM `p24oi86_users` WHERE `username` = :username';
         $result = $this->db->prepare($request);
         $result->bindValue(':username', $this->username, PDO::PARAM_STR);
-        if ($result->execute()) { 
+        if ($result->execute()) {
             $selectResult = $result->fetch(PDO::FETCH_OBJ);
             if (is_object($selectResult)) { //On vérifie que l'on a bien trouvé un utilisateur
                 // On hydrate
@@ -80,4 +80,25 @@ class users extends database {
         }
         return $exist;
     }
+
+    /**
+     * méthode pour récuperer les informations de l'utilisateur
+     */
+    public function getProfilUser() {
+        $result = false;
+        //déclaration de la requete sql
+        $request = 'SELECT `id`, `lastname`, `username`, `firstname`, DATE_FORMAT(`birthdate`, \'%d/%m/%Y\') AS `birthdate`,DATE_FORMAT(`createDate`, \'%d/%m/%Y\') AS `createDate`, `phone`, `mail`,`idCivility`, `idUserType` '
+                . 'FROM `p24oi86_users` '
+                . 'WHERE `id` = :id';
+        $profilUser = $this->db->prepare($request);
+        //attribution des valeurs des id avec bindValue
+        $profilUser->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $profilUser->execute();
+        if (is_object($profilUser)) {
+            //récupération des infos de l'utilisateur!! :)
+            $result = $profilUser->fetch(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
+
 }
