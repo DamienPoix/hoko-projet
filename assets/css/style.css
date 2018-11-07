@@ -1,15 +1,33 @@
+/* <--------------------------------------------------------- > OTHER <---------------------------------------------------------> */
 #styleNavModification{
     display: inline-block;
-}
-.error{
-    color:red;
-    position: absolute;
 }
 #dropWidth{
     width: 125px;
 }
-/*profil css */
+.hidden{
+    display: none;
+}
+.relative{
+    position: relative;
+}
+/* <--------------------------------------------------------- > ERRORS <---------------------------------------------------------> */
+.error{
+    color:red;
+    position: absolute;
+}
+.errorProfil{
+    color: red;  
+}
+/*<--------------------------------------------------------- > PROFIL <---------------------------------------------------------> */
+.userImg{
+    width: 19.318em;
+    height: 18em;
+    object-fit: contain;
+}
 .profilImg{
+    max-height: 10%;
+    max-width: 13%;
     float: left;
     border: 1px silver solid;
     max-width: 15.67em;

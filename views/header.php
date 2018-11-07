@@ -13,6 +13,7 @@ include_once path::getControllersPath() . 'profilCtl.php';
         <script src="../assets/JS/headerScript.js"></script>
         <script src="../assets/JS/formAjax.js"></script>
         <script src="../assets/JS/loginScript.js"></script>
+        <script src="../assets/JS/imageProfilScript.js"></script>
         <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
     <body>
@@ -57,10 +58,10 @@ include_once path::getControllersPath() . 'profilCtl.php';
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="material-icons prefix">vpn_key</i>
-                                    <input type="text" id="passwordConnexion" class="autocomplete btn" name="passwordConnexion">
+                                    <input type="text" id="passwordConnexion"  name="passwordConnexion">
                                     <label for="passwordConnexion">mot de passe</label>
                                 </div>
-                                <input type="submit" name="login" id="login" />
+                                <input type="submit" class="btn" name="login" id="login" />
                             </div>
                         </form>
                         <button class="btn formVisibilty">Inscription</button>
@@ -136,7 +137,7 @@ include_once path::getControllersPath() . 'profilCtl.php';
                                 <div class="row">
                                     <div class="input-field col s12 m12">
                                         <i class="material-icons prefix">vpn_key</i>
-                                        <input type="password" name="password" id="password" class="validate" required />
+                                        <input type="text" name="password" id="password" class="validate" required />
                                         <label for="password">Mot de passe </label>
                                         <p class="error"></p>
                                     </div>

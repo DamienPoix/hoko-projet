@@ -14,7 +14,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('.dropdown-trigger').dropdown();
     var elem = document.querySelector('.menu_trigger');
-    var instance = M.Dropdown.init(elem ,{
+    var instance = M.Dropdown.init(elem, {
         constrainWidth: false,
     });
 });
